@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>We're Hiring. Hands Down. — Macgregor's Original</title>
+<meta name="description" content="Macgregor's Original is hiring grill chefs, kitchen hands and front of house in Abbotsford. Join the best burger shop in the Solar System.">
+<meta property="og:title" content="We're Hiring. Hands Down. — Macgregor's Original">
+<meta property="og:description" content="Grill chefs, kitchen hands and front of house wanted. 212 Nicholson St, Abbotsford.">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Archivo:wght@400;500;600;700;800&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --ink:#0C0D10;
+  --ink-soft:#1A1C22;
+  --bone:#F4F6FA;
+  --bone-dim:#C3CCDA;
+  --blue:#1348E8;
+  --blue-dark:#0B32AE;
+  --blue-bright:#4C82FF;
+  --sky:#C3D6FF;
+
+  --display:"Alfa Slab One", Georgia, serif;
+  --body:"Archivo", "Helvetica Neue", Arial, sans-serif;
+  --ticket:"Courier Prime", "Courier New", monospace;
+
+  --pad:clamp(1.25rem, 5vw, 5rem);
+  --tile:44px;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--bone);
+  color:var(--ink);
+  font-family:var(--body);
+  font-size:clamp(1rem,0.96rem + 0.2vw,1.125rem);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block}
+a{color:inherit}
+
+/* ---------- shared bits ---------- */
+.wrap{max-width:1180px;margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+.section{padding:clamp(3.5rem,8vw,7rem) 0}
+.section--ink{background:var(--ink);color:var(--bone)}
+.section--ink h2{color:var(--bone)}
+
+.eyebrow{
+  font-family:var(--ticket);
+  font-size:.8rem;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  margin:0 0 1.25rem;
+  display:flex;align-items:center;gap:.75rem;
+}
+.eyebrow::after{content:"";flex:1;height:1px;background:currentColor;opacity:.3}
+
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:.95;letter-spacing:-.01em;margin:0}
+h2{font-size:clamp(2rem,1.3rem + 3.2vw,3.6rem);text-transform:uppercase}
+h3{font-size:1.35rem;text-transform:uppercase;line-height:1.05}
+p{margin:0 0 1.1em}
+.lede{font-size:clamp(1.06rem,1rem + .4vw,1.3rem)}
+
+/* checkerboard tile band — the shop floor */
+.tiles{
+  height:var(--tile);
+  background-color:#fff;
+  background-image:
+    linear-gradient(45deg,var(--blue) 25%,transparent 25%,transparent 75%,var(--blue) 75%),
+    linear-gradient(45deg,var(--blue) 25%,transparent 25%,transparent 75%,var(--blue) 75%);
+  background-size:var(--tile) var(--tile);
+  background-position:0 0, calc(var(--tile)/2) calc(var(--tile)/2);
+}
+
+/* buttons */
+.btn{
+  display:inline-flex;align-items:center;gap:.6rem;
+  font-family:var(--display);font-size:clamp(1rem,.95rem + .35vw,1.25rem);
+  text-transform:uppercase;text-decoration:none;
+  background:var(--blue);color:#fff;
+  border:3px solid var(--ink);border-radius:2px;
+  padding:.9rem 1.6rem;cursor:pointer;
+  box-shadow:6px 6px 0 var(--ink);
+  transition:transform .12s ease, box-shadow .12s ease, background .12s ease;
+}
+.btn:hover{background:var(--blue-dark);transform:translate(3px,3px);box-shadow:3px 3px 0 var(--ink)}
+.btn:active{transform:translate(6px,6px);box-shadow:0 0 0 var(--ink)}
+.btn .arrow{font-family:var(--body);font-weight:700}
+.section--ink .btn{border-color:var(--bone);box-shadow:6px 6px 0 var(--sky)}
+.section--ink .btn:hover{box-shadow:3px 3px 0 var(--sky)}
+
+:focus-visible{outline:3px solid var(--blue-bright);outline-offset:3px}
+
+/* ---------- marquee ---------- */
+.marquee{overflow:hidden;white-space:nowrap;border-top:3px solid var(--ink);border-bottom:3px solid var(--ink);background:var(--sky)}
+.marquee__track{display:inline-flex;will-change:transform;animation:slide 26s linear infinite}
+.marquee span{
+  font-family:var(--display);text-transform:uppercase;
+  font-size:.95rem;letter-spacing:.04em;
+  padding:.55rem 0;
+}
+.marquee span i{font-style:normal;color:var(--blue);padding:0 1rem}
+@keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ---------- header ---------- */
+.topbar{
+  position:sticky;top:0;z-index:50;
+  background:var(--ink);color:var(--bone);
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  padding:.7rem var(--pad);
+  border-bottom:3px solid var(--blue-bright);
+}
+.brand{display:inline-flex;align-items:center;text-decoration:none;line-height:0}
+.brand__logo{height:40px;width:auto;display:block}
+.topbar a.mini{
+  font-family:var(--ticket);font-size:.75rem;letter-spacing:.16em;text-transform:uppercase;
+  text-decoration:none;border-bottom:2px solid var(--blue-bright);padding-bottom:2px;
+}
+
+/* ---------- hero ---------- */
+.hero{background:var(--ink);color:var(--bone);position:relative;overflow:hidden}
+.hero__inner{padding:clamp(3rem,7vw,6rem) 0 clamp(3rem,6vw,5rem)}
+.hero h1{
+  font-size:clamp(2.9rem,1.2rem + 9.4vw,8.2rem);
+  text-transform:uppercase;
+  line-height:.86;
+}
+.hero h1 .down{color:var(--blue-bright);display:block}
+.hero__sub{
+  font-size:clamp(1.15rem,1rem + .8vw,1.9rem);
+  font-weight:600;max-width:26ch;margin:1.6rem 0 .5rem;
+}
+.hero__note{font-family:var(--ticket);font-size:.8rem;color:var(--bone-dim);margin-bottom:2.2rem}
+.hero__meta{
+  display:flex;flex-wrap:wrap;gap:.5rem 1.6rem;margin-top:2.4rem;
+  font-family:var(--ticket);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--bone-dim);
+}
+
+/* ---------- intro ---------- */
+.intro__grid{display:grid;grid-template-columns:1fr;gap:2.5rem}
+@media(min-width:900px){.intro__grid{grid-template-columns:1.15fr .85fr;gap:4rem}}
+.plaque{
+  border:3px solid var(--ink);border-radius:2px;background:#fff;
+  padding:1.75rem;box-shadow:8px 8px 0 var(--blue);align-self:start;
+}
+.plaque .eyebrow{color:var(--blue)}
+.plaque p:last-child{margin-bottom:0}
+
+/* ---------- roles ---------- */
+.tickets{display:grid;gap:1.5rem;grid-template-columns:1fr;margin-top:2.5rem}
+@media(min-width:760px){.tickets{grid-template-columns:repeat(3,1fr)}}
+.ticket{
+  background:var(--bone);color:var(--ink);
+  border:3px solid var(--bone);border-radius:2px;
+  display:flex;flex-direction:column;
+  transition:transform .15s ease;
+}
+.ticket:hover{transform:translateY(-6px)}
+.ticket__head{
+  font-family:var(--ticket);font-weight:700;font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;
+  background:var(--ink);color:var(--sky);
+  padding:.55rem 1.25rem;display:flex;justify-content:space-between;
+  border-bottom:3px solid var(--blue-bright);
+}
+.ticket__body{padding:1.5rem 1.25rem 1.75rem}
+.ticket__body h3{margin-bottom:.75rem}
+.ticket__body p{margin:0;font-size:.98rem}
+.ticket__perf{
+  height:14px;
+  background:radial-gradient(circle at 7px 0, transparent 6px, var(--bone) 6px);
+  background-size:14px 14px;background-position:0 0;
+}
+
+/* ---------- lists ---------- */
+.checklist{list-style:none;margin:2.25rem 0 0;padding:0;display:grid;gap:1.1rem}
+@media(min-width:860px){.checklist{grid-template-columns:1fr 1fr;gap:1.4rem 3rem}}
+.checklist li{display:flex;gap:1rem;align-items:flex-start;border-bottom:1px dashed var(--bone-dim);padding-bottom:1.1rem}
+.section--ink .checklist li{border-color:rgba(240,235,224,.22)}
+.checklist .mark{
+  flex:none;width:26px;height:26px;border-radius:50%;
+  background:var(--blue);color:#fff;
+  display:grid;place-items:center;font-size:.8rem;font-weight:700;margin-top:2px;
+}
+.checklist strong{display:block;font-size:1.02rem}
+.checklist span.txt{font-size:.95rem;opacity:.85}
+
+.perks .mark{background:#fff;color:var(--ink)}
+
+/* ---------- apply / builder ---------- */
+.apply{background:var(--sky);border-top:3px solid var(--ink);border-bottom:3px solid var(--ink)}
+.apply h2{max-width:16ch}
+.builder{
+  margin-top:2.5rem;background:var(--bone);
+  border:3px solid var(--ink);border-radius:2px;box-shadow:10px 10px 0 var(--ink);
+}
+.builder__head{
+  font-family:var(--ticket);font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;
+  background:var(--ink);color:var(--bone);padding:.6rem 1.5rem;
+  display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+}
+.builder__body{padding:clamp(1.25rem,4vw,2.25rem)}
+.field{margin-bottom:1.75rem}
+.field:last-of-type{margin-bottom:1.25rem}
+.field > label,.field > .lbl{
+  display:block;font-family:var(--ticket);font-size:.76rem;letter-spacing:.18em;text-transform:uppercase;
+  margin-bottom:.7rem;
+}
+.roles-pick{display:flex;flex-wrap:wrap;gap:.6rem}
+.pill{
+  font-family:var(--body);font-weight:700;font-size:.9rem;
+  background:transparent;border:2px solid var(--ink);border-radius:999px;
+  padding:.5rem 1.1rem;cursor:pointer;transition:background .12s ease,color .12s ease;
+}
+.pill[aria-pressed="true"]{background:var(--ink);color:var(--bone)}
+input[type="text"],input[type="email"],textarea{
+  width:100%;font:inherit;font-size:1rem;
+  padding:.75rem .9rem;background:#fff;
+  border:2px solid var(--ink);border-radius:2px;
+}
+textarea{resize:vertical;min-height:5rem}
+input[type="range"]{width:100%;accent-color:var(--blue)}
+.stance{
+  font-family:var(--display);text-transform:uppercase;color:var(--blue);
+  font-size:1.15rem;margin-top:.6rem;
+}
+.builder__foot{
+  border-top:3px dashed var(--ink);padding:1.5rem clamp(1.25rem,4vw,2.25rem);
+  display:flex;flex-wrap:wrap;align-items:center;gap:1rem 1.5rem;
+}
+.builder__foot p{margin:0;font-family:var(--ticket);font-size:.78rem;line-height:1.5;max-width:34ch}
+.builder__foot a.plain{font-family:var(--ticket);font-size:.78rem}
+
+/* ---------- footer ---------- */
+.footer{background:var(--ink);color:var(--bone);text-align:center;padding:clamp(2.5rem,6vw,4rem) 0}
+.footer .sign{font-family:var(--display);text-transform:uppercase;font-size:clamp(1.5rem,1rem + 2.4vw,2.6rem);line-height:1;margin-bottom:1.25rem}
+.footer .sign em{font-style:normal;color:var(--blue-bright)}
+.footer address{font-style:normal;font-family:var(--ticket);font-size:.85rem;letter-spacing:.1em;line-height:2;color:var(--bone-dim)}
+.footer address a{text-decoration:none;border-bottom:1px solid var(--blue-bright)}
+
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <a class="brand" href="#top" aria-label="Macgregor's Original — home">
+    <img class="brand__logo" src="https://res.cloudinary.com/gagan/image/upload/w_400/v1765875158/preset_folder/zlejhyo4vcasrzgrvkjx.png" alt="Macgregor's Original">
+  </a>
+  <a class="mini" href="#apply">Apply ↓</a>
+</header>
+
+<!-- ================= HERO ================= -->
+<!-- Alt headlines available: NOW HIRING: HEROES OF HOSPITALITY / WANTED: PEOPLE WHO LOVE PICKLES / COME SMASH BURGERS WITH US -->
+<section class="hero" id="top">
+  <div class="wrap hero__inner">
+    <p class="eyebrow" style="color:var(--sky)">Now hiring · Grill · Kitchen · Front of house</p>
+    <h1>We're hiring.<span class="down">Hands down.</span></h1>
+    <p class="hero__sub">Join the best burger shop in the Solar System.*</p>
+    <p class="hero__note">*Unverified. But we're confident.</p>
+    <a class="btn" href="#apply">I'm in <span class="arrow">→</span></a>
+    <div class="hero__meta">
+      <span>212 Nicholson St, Abbotsford</span>
+      <span>Thu–Sun trade</span>
+      <span>Casual &amp; part-time</span>
+    </div>
+  </div>
+  <div class="tiles" aria-hidden="true"></div>
+</section>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__track">
+    <span>Grill chefs <i>•</i> Kitchen hands <i>•</i> Front of house <i>•</i> Grill chefs <i>•</i> Kitchen hands <i>•</i> Front of house <i>•</i>&nbsp;</span>
+    <span>Grill chefs <i>•</i> Kitchen hands <i>•</i> Front of house <i>•</i> Grill chefs <i>•</i> Kitchen hands <i>•</i> Front of house <i>•</i>&nbsp;</span>
+  </div>
+</div>
+
+<!-- ================= INTRO ================= -->
+<section class="section">
+  <div class="wrap intro__grid">
+    <div>
+      <p class="eyebrow">The shop</p>
+      <h2>Heroes of hospitality,<br>this is your sign.</h2>
+      <p class="lede" style="margin-top:1.5rem">Macgregor's Original is a smash burger shop in Abbotsford doing one thing really, really well: simple, American-style burgers with zero gimmicks and maximum flavour.</p>
+      <p>No stunt burgers. No towering nonsense dripping down your elbow. Just smashed patties, melty cheese, buttered Martin's rolls, and chips cooked in beef tallow the way the burger gods intended.</p>
+      <p>We're growing, and we need good humans on the grill, in the kitchen, and out front.</p>
+    </div>
+    <aside class="plaque">
+      <p class="eyebrow">Previously on this site</p>
+      <p>Our shop used to be a movie set for a Hollywood film. Now it's the neighbourhood's favourite burger joint.</p>
+      <p>We think that's a pretty good career trajectory, and we'd like yours to follow a similar arc.</p>
+    </aside>
+  </div>
+</section>
+
+<!-- ================= ROLES ================= -->
+<section class="section section--ink">
+  <div class="wrap">
+    <p class="eyebrow" style="color:var(--sky)">Open roles</p>
+    <h2>Pick your fighter.</h2>
+    <div class="tickets">
+
+      <article class="ticket">
+        <div class="ticket__head"><span>Station</span><span>Grill</span></div>
+        <div class="ticket__body">
+          <h3>Grill chefs &amp; cooks</h3>
+          <p>You'll be the one smashing patties, laying cheese, and toasting buns to golden perfection. If the sound of a patty hitting a hot griddle sparks joy, we need to talk.</p>
+        </div>
+        <div class="ticket__perf" aria-hidden="true"></div>
+      </article>
+
+      <article class="ticket">
+        <div class="ticket__head"><span>Station</span><span>Kitchen</span></div>
+        <div class="ticket__body">
+          <h3>Kitchen hands</h3>
+          <p>The backbone of the whole operation. Prep, pickles, and keeping the engine room humming. Not glamorous? Wrong. Extremely glamorous.</p>
+        </div>
+        <div class="ticket__perf" aria-hidden="true"></div>
+      </article>
+
+      <article class="ticket">
+        <div class="ticket__head"><span>Station</span><span>Front</span></div>
+        <div class="ticket__body">
+          <h3>Front of house</h3>
+          <p>The face of the best burger shop in the Solar System. You'll take orders, make people feel welcome, and hand over burgers to visibly delighted humans all night. Honestly, one of the better jobs going.</p>
+        </div>
+        <div class="ticket__perf" aria-hidden="true"></div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= WHO ================= -->
+<section class="section">
+  <div class="wrap">
+    <p class="eyebrow">The brief</p>
+    <h2>You, ideally, are:</h2>
+    <ul class="checklist">
+      <li><span class="mark" aria-hidden="true">✓</span><span><strong>Friendly, happy, good vibes.</strong><span class="txt">Non-negotiable. We can teach the grill. We can't teach vibes.</span></span></li>
+      <li><span class="mark" aria-hidden="true">✓</span><span><strong>A problem solver.</strong><span class="txt">When it gets busy (and it gets busy), you keep your cool and figure it out.</span></span></li>
+      <li><span class="mark" aria-hidden="true">✓</span><span><strong>Reliable.</strong><span class="txt">You show up. Revolutionary stuff.</span></span></li>
+      <li><span class="mark" aria-hidden="true">✓</span><span><strong>Fast-paced friendly.</strong><span class="txt">Friday night rush is your cardio.</span></span></li>
+      <li><span class="mark" aria-hidden="true">✓</span><span><strong>A pickle enthusiast.</strong><span class="txt">If you don't love pickles, we can work on it together. But know that we WILL work on it.</span></span></li>
+      <li><span class="mark" aria-hidden="true">✓</span><span><strong>Keen to be part of something.</strong><span class="txt">Small team, big standards, great culture, zero egos.</span></span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= WHY ================= -->
+<section class="section section--ink">
+  <div class="wrap">
+    <p class="eyebrow" style="color:var(--sky)">The trade</p>
+    <h2>What's in it for you?</h2>
+    <ul class="checklist perks">
+      <li><span class="mark" aria-hidden="true">★</span><span><strong>An amazing team &amp; culture.</strong><span class="txt">We're a small crew that actually likes each other. Rare, we know.</span></span></li>
+      <li><span class="mark" aria-hidden="true">★</span><span><strong>Real skills.</strong><span class="txt">Learn the craft of proper American-style smash burgers from people who are obsessed with getting it right.</span></span></li>
+      <li><span class="mark" aria-hidden="true">★</span><span><strong>A shop with a story.</strong><span class="txt">Checkered tiles, bodega energy, and a Hollywood past. Your workplace has range.</span></span></li>
+      <li><span class="mark" aria-hidden="true">★</span><span><strong>Staff burgers.</strong><span class="txt">We weren't going to make you watch.</span></span></li>
+      <li><span class="mark" aria-hidden="true">★</span><span><strong>A neighbourhood that loves us.</strong><span class="txt">Abbotsford locals treat this place like their spot, because it is.</span></span></li>
+    </ul>
+  </div>
+</section>
+
+<div class="tiles" aria-hidden="true"></div>
+
+<!-- ================= APPLY ================= -->
+<!-- Alt CTA buttons: LET'S KETCHUP → Email Laura / APPLY. RELISH THE OPPORTUNITY. / I LOVE PICKLES, HIRE ME -->
+<section class="section apply" id="apply">
+  <div class="wrap">
+    <p class="eyebrow">Apply</p>
+    <h2>Sound like you? Smash that apply button.</h2>
+    <p class="lede" style="max-width:52ch;margin-top:1.5rem">Fill out the docket below and hit send — it goes straight to Laura's inbox. She'll reply to the email you leave.</p>
+
+    <form class="builder" action="https://formsubmit.co/laura@macgregorsoriginal.com" method="POST">
+      <!-- FormSubmit config: no signup, delivers to Laura's email -->
+      <input type="hidden" name="_subject" value="New application — Macgregor's Original">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="text" name="_honey" style="display:none">
+      <input type="hidden" name="Role" id="roleField" value="Grill Chef / Cook">
+      <input type="hidden" name="Pickle stance" id="pickleField" value="Pickle-friendly">
+
+      <div class="builder__head"><span>Order docket</span><span>Table: Laura</span></div>
+      <div class="builder__body">
+
+        <div class="field">
+          <span class="lbl" id="rolelbl">1 · Role you're after</span>
+          <div class="roles-pick" role="group" aria-labelledby="rolelbl">
+            <button type="button" class="pill" aria-pressed="true" data-role="Grill Chef / Cook">Grill chef / cook</button>
+            <button type="button" class="pill" aria-pressed="false" data-role="Kitchen Hand">Kitchen hand</button>
+            <button type="button" class="pill" aria-pressed="false" data-role="Front of House">Front of house</button>
+            <button type="button" class="pill" aria-pressed="false" data-role="Anything going">Anything going</button>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="name">2 · Your name</label>
+          <input type="text" id="name" name="Name" placeholder="e.g. Sam Reid" autocomplete="name" required>
+        </div>
+
+        <div class="field">
+          <label for="email">3 · Your email <span style="text-transform:none;letter-spacing:0">(so Laura can reply)</span></label>
+          <input type="email" id="email" name="Email" placeholder="e.g. sam@email.com" autocomplete="email" required>
+        </div>
+
+        <div class="field">
+          <label for="avail">4 · Your availability</label>
+          <input type="text" id="avail" name="Availability" placeholder="e.g. Thu–Sun nights, from mid-March">
+        </div>
+
+        <div class="field">
+          <label for="pickle">5 · Your pickle stance <span style="text-transform:none;letter-spacing:0">(bonus points)</span></label>
+          <input type="range" id="pickle" min="0" max="4" value="2" step="1">
+          <p class="stance" id="stanceout">Pickle-friendly</p>
+        </div>
+
+        <div class="field" style="margin-bottom:0">
+          <label for="about">6 · A bit about you</label>
+          <textarea id="about" name="About you" placeholder="Tell Laura who you are and where you've worked."></textarea>
+        </div>
+
+      </div>
+      <div class="builder__foot">
+        <button type="submit" class="btn">Send application <span class="arrow">→</span></button>
+        <p>Sends straight to Laura's inbox — no email app required.</p>
+      </div>
+    </form>
+
+    <p style="margin-top:1.75rem;font-family:var(--ticket);font-size:.85rem">
+      Prefer to do it the old way? <a class="plain" href="mailto:laura@macgregorsoriginal.com">laura@macgregorsoriginal.com</a>
+    </p>
+  </div>
+</section>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__track">
+    <span>Macgregor's Original is for everyone. <i>•</i> Macgregor's Original is for everyone. <i>•</i> Macgregor's Original is for everyone. <i>•</i>&nbsp;</span>
+    <span>Macgregor's Original is for everyone. <i>•</i> Macgregor's Original is for everyone. <i>•</i> Macgregor's Original is for everyone. <i>•</i>&nbsp;</span>
+  </div>
+</div>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+  <div class="wrap">
+    <p class="sign">Best. Burgers. <em>Hands down.</em></p>
+    <address>
+      Macgregor's Original — 212 Nicholson St, Abbotsford VIC 3067<br>
+      <a href="mailto:laura@macgregorsoriginal.com">laura@macgregorsoriginal.com</a> · <a href="tel:0485002000">0485 002 000</a><br>
+      No experience with fame required. The shop's already been in a movie — now it just needs you.
+    </address>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var STANCES = [
+    "Pickle-curious",
+    "Pickle-tolerant",
+    "Pickle-friendly",
+    "Pickle-forward",
+    "Extra pickles, no exceptions"
+  ];
+
+  var pills       = Array.prototype.slice.call(document.querySelectorAll(".pill"));
+  var pickle      = document.getElementById("pickle");
+  var out         = document.getElementById("stanceout");
+  var roleField   = document.getElementById("roleField");
+  var pickleField = document.getElementById("pickleField");
+
+  function update(){
+    out.textContent = STANCES[pickle.value];
+    pickleField.value = STANCES[pickle.value];
+  }
+
+  pills.forEach(function(p){
+    p.addEventListener("click", function(){
+      pills.forEach(function(o){ o.setAttribute("aria-pressed","false"); });
+      p.setAttribute("aria-pressed","true");
+      roleField.value = p.dataset.role;
+    });
+  });
+
+  pickle.addEventListener("input", update);
+  update();
+})();
+</script>
+
+</body>
+</html>
