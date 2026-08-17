@@ -169,9 +169,19 @@ p{margin:0 0 1.1em}
   padding:.55rem 1.25rem;display:flex;justify-content:space-between;
   border-bottom:3px solid var(--blue-bright);
 }
-.ticket__body{padding:1.5rem 1.25rem 1.75rem}
+.ticket__body{padding:1.5rem 1.25rem 1.75rem;display:flex;flex-direction:column;flex:1}
 .ticket__body h3{margin-bottom:.75rem}
-.ticket__body p{margin:0;font-size:.98rem}
+.ticket__body p{margin:0 0 1.35rem;font-size:.98rem}
+.ticket__cta{
+  align-self:flex-start;margin-top:auto;
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-family:var(--ticket);font-weight:700;font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink);text-decoration:none;
+  border:2px solid var(--ink);border-radius:2px;padding:.55rem .95rem;background:transparent;cursor:pointer;
+  transition:background .12s ease,color .12s ease,border-color .12s ease;
+}
+.ticket__cta:hover{background:var(--blue);color:#fff;border-color:var(--blue)}
+.ticket__cta .arrow{font-family:var(--body);font-weight:700}
 .ticket__perf{
   height:14px;
   background:radial-gradient(circle at 7px 0, transparent 6px, var(--bone) 6px);
@@ -244,6 +254,49 @@ input[type="range"]{width:100%;accent-color:var(--blue)}
 .footer address{font-style:normal;font-family:var(--ticket);font-size:.85rem;letter-spacing:.1em;line-height:2;color:var(--bone-dim)}
 .footer address a{text-decoration:none;border-bottom:1px solid var(--blue-bright)}
 
+/* ---------- photos ---------- */
+.photo{
+  border:3px solid var(--ink);border-radius:2px;background:#fff;
+  box-shadow:8px 8px 0 var(--blue);overflow:hidden;position:relative;
+}
+.photo img{width:100%;height:100%;object-fit:cover;display:block}
+.photo__tag{
+  position:absolute;left:.85rem;bottom:.85rem;
+  font-family:var(--ticket);font-weight:700;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;
+  background:var(--ink);color:var(--bone);padding:.4rem .7rem;border-radius:2px;
+  box-shadow:3px 3px 0 var(--blue);
+}
+.section--ink .photo{box-shadow:8px 8px 0 var(--blue-bright)}
+
+/* hero split */
+.hero__grid{display:grid;grid-template-columns:1fr;gap:2.75rem;align-items:center}
+@media(min-width:920px){.hero__grid{grid-template-columns:1.05fr .95fr;gap:3.5rem}}
+.hero__shot{aspect-ratio:4/3;box-shadow:12px 12px 0 var(--blue-bright);transform:rotate(-2deg)}
+.hero__shot .photo__tag{background:var(--blue);left:auto;right:.85rem;box-shadow:3px 3px 0 var(--ink);transform:rotate(2deg)}
+
+/* shopfront feature */
+.feature{margin-top:2.25rem}
+.feature .photo{aspect-ratio:3/2}
+
+/* ticket photo */
+.ticket__shot{aspect-ratio:5/4;overflow:hidden;background:var(--ink);border-bottom:3px solid var(--blue-bright)}
+.ticket__shot img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s ease}
+.ticket:hover .ticket__shot img{transform:scale(1.06)}
+
+/* media + text split */
+.media-split{display:grid;grid-template-columns:1fr;gap:2.5rem;align-items:center;margin-top:2.5rem}
+@media(min-width:900px){.media-split{grid-template-columns:1fr 1fr;gap:3.5rem}}
+.media-split--flip .photo{order:-1}
+@media(min-width:900px){.media-split--flip .photo{order:1}}
+.media-split .photo{aspect-ratio:3/2}
+
+/* gallery strip — the contact sheet */
+.strip{display:grid;grid-template-columns:repeat(2,1fr);gap:4px;background:var(--ink);padding:4px;border-top:3px solid var(--ink);border-bottom:3px solid var(--ink)}
+@media(min-width:760px){.strip{grid-template-columns:repeat(4,1fr)}}
+.strip figure{margin:0;aspect-ratio:1/1;overflow:hidden;position:relative}
+.strip img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
+.strip figure:hover img{transform:scale(1.07)}
+
 @media (prefers-reduced-motion: reduce){
   *{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important}
   html{scroll-behavior:auto}
@@ -263,15 +316,23 @@ input[type="range"]{width:100%;accent-color:var(--blue)}
 <!-- Alt headlines available: NOW HIRING: HEROES OF HOSPITALITY / WANTED: PEOPLE WHO LOVE PICKLES / COME SMASH BURGERS WITH US -->
 <section class="hero" id="top">
   <div class="wrap hero__inner">
-    <p class="eyebrow" style="color:var(--sky)">Now hiring · Grill · Kitchen · Front of house</p>
-    <h1>We're hiring.<span class="down">Hands down.</span></h1>
-    <p class="hero__sub">Join the best burger shop in the Solar System.*</p>
-    <p class="hero__note">*Unverified. But we're confident.</p>
-    <a class="btn" href="#apply">I'm in <span class="arrow">→</span></a>
-    <div class="hero__meta">
-      <span>212 Nicholson St, Abbotsford</span>
-      <span>Thu–Sun trade</span>
-      <span>Casual &amp; part-time</span>
+    <div class="hero__grid">
+      <div class="hero__copy">
+        <p class="eyebrow" style="color:var(--sky)">Now hiring · Grill · Kitchen · Front of house</p>
+        <h1>We're hiring.<span class="down">Hands down.</span></h1>
+        <p class="hero__sub">Join the best burger shop in the Solar System.*</p>
+        <p class="hero__note">*Unverified. But we're confident.</p>
+        <a class="btn" href="#apply">I'm in <span class="arrow">→</span></a>
+        <div class="hero__meta">
+          <span>212 Nicholson St, Abbotsford</span>
+          <span>Thu–Sun trade</span>
+          <span>Casual &amp; part-time</span>
+        </div>
+      </div>
+      <figure class="photo hero__shot" style="margin:0">
+        <img src="images/hero-burger.jpg" alt="A Macgregor's smash burger — melty cheese, pickles and a crispy onion on a toasted Martin's roll, wrapped in blue-checkered paper." loading="eager" width="1024" height="683">
+        <span class="photo__tag">Exhibit A</span>
+      </figure>
     </div>
   </div>
   <div class="tiles" aria-hidden="true"></div>
@@ -294,16 +355,22 @@ input[type="range"]{width:100%;accent-color:var(--blue)}
       <p>No stunt burgers. No towering nonsense dripping down your elbow. Just smashed patties, melty cheese, buttered Martin's rolls, and chips cooked in beef tallow the way the burger gods intended.</p>
       <p>We're growing, and we need good humans on the grill, in the kitchen, and out front.</p>
     </div>
-    <aside class="plaque">
-      <p class="eyebrow">Previously on this site</p>
-      <p>Our shop used to be a movie set for a Hollywood film. Now it's the neighbourhood's favourite burger joint.</p>
-      <p>We think that's a pretty good career trajectory, and we'd like yours to follow a similar arc.</p>
-    </aside>
+    <div>
+      <figure class="photo feature" style="margin:0 0 2.25rem">
+        <img src="images/shopfront.jpg" alt="The Macgregor's Original shopfront on Nicholson St — red brick, teal signage, checkered tiles just inside the open door." loading="lazy" width="1024" height="683">
+        <span class="photo__tag">212 Nicholson St</span>
+      </figure>
+      <aside class="plaque">
+        <p class="eyebrow">Previously on this site</p>
+        <p>Our shop used to be a movie set for a Hollywood film. Now it's the neighbourhood's favourite burger joint.</p>
+        <p>We think that's a pretty good career trajectory, and we'd like yours to follow a similar arc.</p>
+      </aside>
+    </div>
   </div>
 </section>
 
 <!-- ================= ROLES ================= -->
-<section class="section section--ink">
+<section class="section section--ink" id="roles">
   <div class="wrap">
     <p class="eyebrow" style="color:var(--sky)">Open roles</p>
     <h2>Pick your fighter.</h2>
@@ -311,27 +378,33 @@ input[type="range"]{width:100%;accent-color:var(--blue)}
 
       <article class="ticket">
         <div class="ticket__head"><span>Station</span><span>Grill</span></div>
+        <div class="ticket__shot"><img src="images/grill.jpg" alt="A cook smashing a cheese-topped patty on the flat-top griddle, smoke rising." loading="lazy" width="683" height="1024"></div>
         <div class="ticket__body">
           <h3>Grill chefs &amp; cooks</h3>
           <p>You'll be the one smashing patties, laying cheese, and toasting buns to golden perfection. If the sound of a patty hitting a hot griddle sparks joy, we need to talk.</p>
+          <a class="ticket__cta" href="#apply" data-role="Grill Chef / Cook">Apply for this <span class="arrow">→</span></a>
         </div>
         <div class="ticket__perf" aria-hidden="true"></div>
       </article>
 
       <article class="ticket">
         <div class="ticket__head"><span>Station</span><span>Kitchen</span></div>
+        <div class="ticket__shot"><img src="images/kitchen.jpg" alt="A cook in an apron carrying a steel bowl of freshly fried chips through the kitchen." loading="lazy" width="683" height="1024" style="object-position:center 22%"></div>
         <div class="ticket__body">
           <h3>Kitchen hands</h3>
           <p>The backbone of the whole operation. Prep, pickles, and keeping the engine room humming. Not glamorous? Wrong. Extremely glamorous.</p>
+          <a class="ticket__cta" href="#apply" data-role="Kitchen Hand">Apply for this <span class="arrow">→</span></a>
         </div>
         <div class="ticket__perf" aria-hidden="true"></div>
       </article>
 
       <article class="ticket">
         <div class="ticket__head"><span>Station</span><span>Front</span></div>
+        <div class="ticket__shot"><img src="images/counter.jpg" alt="Two Macgregor's staff smiling behind the front counter, under the menu boards." loading="lazy" width="683" height="1024"></div>
         <div class="ticket__body">
           <h3>Front of house</h3>
           <p>The face of the best burger shop in the Solar System. You'll take orders, make people feel welcome, and hand over burgers to visibly delighted humans all night. Honestly, one of the better jobs going.</p>
+          <a class="ticket__cta" href="#apply" data-role="Front of House">Apply for this <span class="arrow">→</span></a>
         </div>
         <div class="ticket__perf" aria-hidden="true"></div>
       </article>
@@ -368,6 +441,17 @@ input[type="range"]{width:100%;accent-color:var(--blue)}
       <li><span class="mark" aria-hidden="true">★</span><span><strong>Staff burgers.</strong><span class="txt">We weren't going to make you watch.</span></span></li>
       <li><span class="mark" aria-hidden="true">★</span><span><strong>A neighbourhood that loves us.</strong><span class="txt">Abbotsford locals treat this place like their spot, because it is.</span></span></li>
     </ul>
+
+    <div class="media-split">
+      <figure class="photo" style="margin:0">
+        <img src="images/burgers-three.jpg" alt="Three Macgregor's smash burgers in blue-checkered wrappers — cheese, pickles and caramelised onions." loading="lazy" width="1024" height="683">
+        <span class="photo__tag">Staff burgers, exhibit B–D</span>
+      </figure>
+      <div>
+        <h3 style="color:var(--bone)">Yes, you get to eat these.</h3>
+        <p style="margin-top:1rem">Smashed patties, melty cheese, buttered Martin's rolls and chips cooked in beef tallow. We weren't going to make you watch. Come find out why the neighbourhood keeps coming back.</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -449,6 +533,14 @@ input[type="range"]{width:100%;accent-color:var(--blue)}
   </div>
 </div>
 
+<!-- ================= CONTACT SHEET ================= -->
+<div class="strip" aria-label="Photos from the shop">
+  <figure><img src="images/window.jpg" alt="Macgregor's Original logo hand-painted on the shop window — 'Best. Burgers. Hands Down.'" loading="lazy" width="1024" height="683"></figure>
+  <figure><img src="images/wrapped.jpg" alt="Burgers wrapped in Macgregor's blue-checkered branded paper." loading="lazy" width="1024" height="683"></figure>
+  <figure><img src="images/team.jpg" alt="Three of the Macgregor's crew grinning in front of the shop window." loading="lazy" width="1024" height="683"></figure>
+  <figure><img src="images/sign.jpg" alt="The hanging Macgregor's Original sign against the plane trees — 'Best. Burgers. Hands Down.'" loading="lazy" width="1024" height="683"></figure>
+</div>
+
 <!-- ================= FOOTER ================= -->
 <footer class="footer">
   <div class="wrap">
@@ -472,6 +564,7 @@ input[type="range"]{width:100%;accent-color:var(--blue)}
   ];
 
   var pills       = Array.prototype.slice.call(document.querySelectorAll(".pill"));
+  var ctas        = Array.prototype.slice.call(document.querySelectorAll(".ticket__cta"));
   var pickle      = document.getElementById("pickle");
   var out         = document.getElementById("stanceout");
   var roleField   = document.getElementById("roleField");
@@ -482,12 +575,20 @@ input[type="range"]{width:100%;accent-color:var(--blue)}
     pickleField.value = STANCES[pickle.value];
   }
 
-  pills.forEach(function(p){
-    p.addEventListener("click", function(){
-      pills.forEach(function(o){ o.setAttribute("aria-pressed","false"); });
-      p.setAttribute("aria-pressed","true");
-      roleField.value = p.dataset.role;
+  function setRole(role){
+    roleField.value = role;
+    pills.forEach(function(o){
+      o.setAttribute("aria-pressed", o.dataset.role === role ? "true" : "false");
     });
+  }
+
+  pills.forEach(function(p){
+    p.addEventListener("click", function(){ setRole(p.dataset.role); });
+  });
+
+  // Role cards deep-link to the form and pre-select their role
+  ctas.forEach(function(c){
+    c.addEventListener("click", function(){ setRole(c.dataset.role); });
   });
 
   pickle.addEventListener("input", update);
