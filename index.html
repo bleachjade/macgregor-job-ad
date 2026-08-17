@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>We're Hiring. Hands Down. — Macgregor's Original</title>
-<meta name="description" content="Macgregor's Original is hiring grill chefs, kitchen hands and front of house in Abbotsford. Join the best burger shop in the Solar System.">
-<meta property="og:title" content="We're Hiring. Hands Down. — Macgregor's Original">
-<meta property="og:description" content="Grill chefs, kitchen hands and front of house wanted. 212 Nicholson St, Abbotsford.">
+<title>We're Hiring — Macgregor's Original</title>
+<meta name="description" content="Macgregor's Original is hiring grill chefs, all-rounders and front of house across our Abbotsford and Yarraville shops. Join the best burger shop in the Solar System.">
+<meta property="og:title" content="We're Hiring — Macgregor's Original">
+<meta property="og:description" content="Grill chefs, all-rounders and front of house wanted — Abbotsford & Yarraville.">
 <meta property="og:type" content="website">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -133,6 +133,12 @@ p{margin:0 0 1.1em}
   line-height:.86;
 }
 .hero h1 .down{color:var(--blue-bright);display:block}
+.hero__where{
+  font-family:var(--body);font-weight:700;
+  font-size:clamp(1.05rem,.95rem + .55vw,1.5rem);
+  color:var(--blue-bright);
+  margin:1rem 0 0;
+}
 .hero__sub{
   font-size:clamp(1.15rem,1rem + .8vw,1.9rem);
   font-weight:600;max-width:26ch;margin:1.6rem 0 .5rem;
@@ -318,8 +324,9 @@ input[type="range"]{width:100%;accent-color:var(--blue)}
   <div class="wrap hero__inner">
     <div class="hero__grid">
       <div class="hero__copy">
-        <p class="eyebrow" style="color:var(--sky)">Now hiring · Grill · Kitchen · Front of house</p>
-        <h1>We're hiring.<span class="down">Hands down.</span></h1>
+        <p class="eyebrow" style="color:var(--sky)">Now hiring · Grill · All-Rounder · Front of house</p>
+        <h1>We're hiring</h1>
+        <p class="hero__where">For both our Abbotsford &amp; Yarraville locations.</p>
         <p class="hero__sub">Join the best burger shop in the Solar System.*</p>
         <p class="hero__note">*Unverified. But we're confident.</p>
         <a class="btn" href="#apply">I'm in <span class="arrow">→</span></a>
@@ -340,8 +347,8 @@ input[type="range"]{width:100%;accent-color:var(--blue)}
 
 <div class="marquee" aria-hidden="true">
   <div class="marquee__track">
-    <span>Grill chefs <i>•</i> Kitchen hands <i>•</i> Front of house <i>•</i> Grill chefs <i>•</i> Kitchen hands <i>•</i> Front of house <i>•</i>&nbsp;</span>
-    <span>Grill chefs <i>•</i> Kitchen hands <i>•</i> Front of house <i>•</i> Grill chefs <i>•</i> Kitchen hands <i>•</i> Front of house <i>•</i>&nbsp;</span>
+    <span>Grill chefs <i>•</i> All-Rounders <i>•</i> Front of house <i>•</i> Grill chefs <i>•</i> All-Rounders <i>•</i> Front of house <i>•</i>&nbsp;</span>
+    <span>Grill chefs <i>•</i> All-Rounders <i>•</i> Front of house <i>•</i> Grill chefs <i>•</i> All-Rounders <i>•</i> Front of house <i>•</i>&nbsp;</span>
   </div>
 </div>
 
@@ -388,12 +395,12 @@ input[type="range"]{width:100%;accent-color:var(--blue)}
       </article>
 
       <article class="ticket">
-        <div class="ticket__head"><span>Station</span><span>Kitchen</span></div>
+        <div class="ticket__head"><span>Station</span><span>All-Rounder</span></div>
         <div class="ticket__shot"><img src="images/kitchen.jpg" alt="A cook in an apron carrying a steel bowl of freshly fried chips through the kitchen." loading="lazy" width="683" height="1024" style="object-position:center 22%"></div>
         <div class="ticket__body">
-          <h3>Kitchen hands</h3>
+          <h3>All-Rounders</h3>
           <p>The backbone of the whole operation. Prep, pickles, and keeping the engine room humming. Not glamorous? Wrong. Extremely glamorous.</p>
-          <a class="ticket__cta" href="#apply" data-role="Kitchen Hand">Apply for this <span class="arrow">→</span></a>
+          <a class="ticket__cta" href="#apply" data-role="All-Rounder">Apply for this <span class="arrow">→</span></a>
         </div>
         <div class="ticket__perf" aria-hidden="true"></div>
       </article>
@@ -481,7 +488,7 @@ input[type="range"]{width:100%;accent-color:var(--blue)}
           <span class="lbl" id="rolelbl">1 · Role you're after</span>
           <div class="roles-pick" role="group" aria-labelledby="rolelbl">
             <button type="button" class="pill" aria-pressed="true" data-role="Grill Chef / Cook">Grill chef / cook</button>
-            <button type="button" class="pill" aria-pressed="false" data-role="Kitchen Hand">Kitchen hand</button>
+            <button type="button" class="pill" aria-pressed="false" data-role="All-Rounder">All-rounder</button>
             <button type="button" class="pill" aria-pressed="false" data-role="Front of House">Front of house</button>
             <button type="button" class="pill" aria-pressed="false" data-role="Anything going">Anything going</button>
           </div>
