@@ -245,7 +245,58 @@ input[type="text"],input[type="email"],textarea{
   border:2px solid var(--ink);border-radius:2px;
 }
 textarea{resize:vertical;min-height:5rem}
-input[type="range"]{width:100%;accent-color:var(--blue)}
+input[type="file"]{
+  width:100%;font:inherit;font-size:.95rem;color:var(--ink);
+  padding:.5rem;background:#fff;
+  border:2px dashed var(--ink);border-radius:2px;cursor:pointer;
+}
+input[type="file"]::file-selector-button{
+  font:inherit;font-family:var(--ticket);font-size:.8rem;
+  text-transform:uppercase;letter-spacing:.04em;
+  margin-right:.75rem;padding:.5rem .9rem;cursor:pointer;
+  background:var(--ink);color:var(--bone);
+  border:none;border-radius:2px;
+}
+input[type="file"]::-webkit-file-upload-button{
+  font:inherit;font-family:var(--ticket);font-size:.8rem;
+  text-transform:uppercase;letter-spacing:.04em;
+  margin-right:.75rem;padding:.5rem .9rem;cursor:pointer;
+  background:var(--ink);color:var(--bone);
+  border:none;border-radius:2px;
+}
+.filehint{margin:.5rem 0 0;font-family:var(--ticket);font-size:.72rem;line-height:1.4;opacity:.75}
+input[type="range"]{
+  width:100%;height:1.6rem;margin:0;padding:0;
+  background:transparent;cursor:pointer;
+  -webkit-appearance:none;-moz-appearance:none;appearance:none;
+  accent-color:var(--blue);
+}
+input[type="range"]:focus{outline:none}
+/* Track — WebKit/Blink (Chrome, Safari, Edge, iOS) */
+input[type="range"]::-webkit-slider-runnable-track{
+  height:6px;border-radius:3px;
+  background:var(--blue);border:1px solid var(--ink);
+}
+/* Track — Firefox */
+input[type="range"]::-moz-range-track{
+  height:6px;border-radius:3px;
+  background:var(--blue);border:1px solid var(--ink);
+}
+/* Thumb — WebKit/Blink */
+input[type="range"]::-webkit-slider-thumb{
+  -webkit-appearance:none;appearance:none;
+  width:20px;height:20px;margin-top:-8px;border-radius:50%;
+  background:var(--bone);border:2px solid var(--ink);
+  box-shadow:0 1px 2px rgba(12,13,16,.35);
+}
+/* Thumb — Firefox */
+input[type="range"]::-moz-range-thumb{
+  width:20px;height:20px;border-radius:50%;
+  background:var(--bone);border:2px solid var(--ink);
+  box-shadow:0 1px 2px rgba(12,13,16,.35);
+}
+input[type="range"]:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 3px rgba(19,72,232,.35)}
+input[type="range"]:focus-visible::-moz-range-thumb{box-shadow:0 0 0 3px rgba(19,72,232,.35)}
 .stance{
   font-family:var(--display);text-transform:uppercase;color:var(--blue);
   font-size:1.15rem;margin-top:.6rem;
@@ -476,7 +527,7 @@ input[type="range"]{width:100%;accent-color:var(--blue)}
     <h2>Sound like you? Smash that apply button.</h2>
     <p class="lede" style="max-width:52ch;margin-top:1.5rem">Fill out the docket below and hit send — it goes straight to Laura's inbox. She'll reply to the email you leave.</p>
 
-    <form class="builder" action="https://formsubmit.co/laura@macgregorsoriginal.com" method="POST">
+    <form class="builder" action="https://formsubmit.co/laura@macgregorsoriginal.com" method="POST" enctype="multipart/form-data">
       <!-- FormSubmit config: no signup, delivers to Laura's email -->
       <input type="hidden" name="_subject" value="New application — Macgregor's Original">
       <input type="hidden" name="_template" value="table">
@@ -519,9 +570,15 @@ input[type="range"]{width:100%;accent-color:var(--blue)}
           <p class="stance" id="stanceout">Pickle-friendly</p>
         </div>
 
-        <div class="field" style="margin-bottom:0">
+        <div class="field">
           <label for="about">6 · A bit about you</label>
           <textarea id="about" name="About you" placeholder="Tell Laura who you are and where you've worked."></textarea>
+        </div>
+
+        <div class="field" style="margin-bottom:0">
+          <label for="resume">7 · Your resume <span style="text-transform:none;letter-spacing:0">(PDF or Word, optional)</span></label>
+          <input type="file" id="resume" name="attachment" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+          <p class="filehint">Max ~5MB. Emailed straight to Laura with your application.</p>
         </div>
 
       </div>
@@ -580,6 +637,27 @@ input[type="range"]{width:100%;accent-color:var(--blue)}
   var out         = document.getElementById("stanceout");
   var roleField   = document.getElementById("roleField");
   var pickleField = document.getElementById("pickleField");
+  var resume      = document.getElementById("resume");
+  var form        = document.querySelector(".builder");
+
+  var MAX_MB    = 5;
+  var MAX_BYTES = MAX_MB * 1024 * 1024;
+
+  // Returns true if the chosen file is within the size limit (or none chosen).
+  function resumeOk(){
+    var hint = resume.nextElementSibling; // the .filehint <p>
+    var file = resume.files && resume.files[0];
+    if (file && file.size > MAX_BYTES){
+      resume.value = "";                  // clear the oversized file
+      hint.textContent = "That file is " + (file.size / 1048576).toFixed(1) +
+        "MB — please attach a resume under " + MAX_MB + "MB.";
+      hint.style.color = "var(--blue)";
+      return false;
+    }
+    hint.textContent = "Max ~" + MAX_MB + "MB. Emailed straight to Laura with your application.";
+    hint.style.color = "";
+    return true;
+  }
 
   function update(){
     out.textContent = STANCES[pickle.value];
@@ -603,6 +681,16 @@ input[type="range"]{width:100%;accent-color:var(--blue)}
   });
 
   pickle.addEventListener("input", update);
+
+  // Reject oversized resumes client-side: on pick, and again as a submit guard.
+  resume.addEventListener("change", resumeOk);
+  form.addEventListener("submit", function(e){
+    if (!resumeOk()){
+      e.preventDefault();
+      resume.focus();
+    }
+  });
+
   update();
 })();
 </script>
