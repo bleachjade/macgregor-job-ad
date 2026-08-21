@@ -239,7 +239,7 @@ p{margin:0 0 1.1em}
   padding:.5rem 1.1rem;cursor:pointer;transition:background .12s ease,color .12s ease;
 }
 .pill[aria-pressed="true"]{background:var(--ink);color:var(--bone)}
-input[type="text"],input[type="email"],textarea{
+input[type="text"],input[type="email"],input[type="tel"],textarea{
   width:100%;font:inherit;font-size:1rem;
   padding:.75rem .9rem;background:#fff;
   border:2px solid var(--ink);border-radius:2px;
@@ -560,23 +560,32 @@ input[type="range"]:focus-visible::-moz-range-thumb{box-shadow:0 0 0 3px rgba(19
         </div>
 
         <div class="field">
-          <label for="avail">4 · Your availability</label>
+          <label for="phone">4 · Your phone <span style="text-transform:none;letter-spacing:0">(mobile is best)</span></label>
+          <input type="tel" id="phone" name="Phone" placeholder="e.g. 0412 345 678"
+                 autocomplete="tel" inputmode="tel" required
+                 pattern="(\+?61[ -]?|0)[ -]?[2-578]([ -]?[0-9]){8}"
+                 title="Enter an Australian number, e.g. 0412 345 678 or +61 412 345 678">
+          <p class="filehint" id="phonehint">Aussie mobile or landline — we'll add the spacing for you.</p>
+        </div>
+
+        <div class="field">
+          <label for="avail">5 · Your availability</label>
           <input type="text" id="avail" name="Availability" placeholder="e.g. Thu–Sun nights, from mid-March">
         </div>
 
         <div class="field">
-          <label for="pickle">5 · Your pickle stance <span style="text-transform:none;letter-spacing:0">(bonus points)</span></label>
+          <label for="pickle">6 · Your pickle stance <span style="text-transform:none;letter-spacing:0">(bonus points)</span></label>
           <input type="range" id="pickle" min="0" max="4" value="2" step="1">
           <p class="stance" id="stanceout">Pickle-friendly</p>
         </div>
 
         <div class="field">
-          <label for="about">6 · A bit about you</label>
+          <label for="about">7 · A bit about you</label>
           <textarea id="about" name="About you" placeholder="Tell us who you are and where you've worked."></textarea>
         </div>
 
         <div class="field" style="margin-bottom:0">
-          <label for="resume">7 · Your resume <span style="text-transform:none;letter-spacing:0">(PDF or Word, optional)</span></label>
+          <label for="resume">8 · Your resume <span style="text-transform:none;letter-spacing:0">(PDF or Word, optional)</span></label>
           <input type="file" id="resume" name="attachment" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
           <p class="filehint">Max ~5MB. Emailed straight to our team with your application.</p>
         </div>
@@ -638,6 +647,8 @@ input[type="range"]:focus-visible::-moz-range-thumb{box-shadow:0 0 0 3px rgba(19
   var roleField   = document.getElementById("roleField");
   var pickleField = document.getElementById("pickleField");
   var resume      = document.getElementById("resume");
+  var phone       = document.getElementById("phone");
+  var phoneHint   = document.getElementById("phonehint");
   var form        = document.querySelector(".builder");
 
   var MAX_MB    = 5;
@@ -656,6 +667,51 @@ input[type="range"]:focus-visible::-moz-range-thumb{box-shadow:0 0 0 3px rgba(19
     }
     hint.textContent = "Max ~" + MAX_MB + "MB. Emailed straight to our team with your application.";
     hint.style.color = "";
+    return true;
+  }
+
+  // --- Australian phone: live spacing + validation -----------------
+  var PHONE_DEFAULT = "Aussie mobile or landline — we'll add the spacing for you.";
+
+  // Group digits into readable AU spacing as the applicant types.
+  function formatAUPhone(raw){
+    var hasPlus = raw.replace(/[^\d+]/g, "").charAt(0) === "+";
+    var digits  = raw.replace(/\D/g, "");
+
+    if (hasPlus && digits.indexOf("61") === 0){        // +61 4xx xxx xxx
+      var nat = digits.slice(2, 11);                   // 9 significant digits
+      var i61 = [nat.slice(0, 3), nat.slice(3, 6), nat.slice(6, 9)].filter(Boolean);
+      return ("+61 " + i61.join(" ")).trim();
+    }
+
+    digits = digits.slice(0, 10);                      // 0xxxxxxxxx
+    if (!digits) return "";
+    var second = digits.charAt(1);
+    if (second === "4" || second === "5"){             // mobile: 04xx xxx xxx
+      return [digits.slice(0, 4), digits.slice(4, 7), digits.slice(7, 10)].filter(Boolean).join(" ");
+    }
+    return [digits.slice(0, 2), digits.slice(2, 6), digits.slice(6, 10)].filter(Boolean).join(" "); // landline: 0x xxxx xxxx
+  }
+
+  // Rewrite the field with spacing; keep the caret at the end while typing.
+  function reformatPhone(){
+    var next = formatAUPhone(phone.value);
+    if (next !== phone.value){
+      phone.value = next;
+      phone.setSelectionRange(next.length, next.length);
+    }
+  }
+
+  // Returns true if the number is empty or matches the AU pattern.
+  function phoneOk(){
+    var val = phone.value.trim();
+    if (val && !phone.checkValidity()){
+      phoneHint.textContent = "That doesn't look like an Australian number — try 0412 345 678.";
+      phoneHint.style.color = "var(--blue)";
+      return false;
+    }
+    phoneHint.textContent = PHONE_DEFAULT;
+    phoneHint.style.color = "";
     return true;
   }
 
@@ -682,9 +738,19 @@ input[type="range"]:focus-visible::-moz-range-thumb{box-shadow:0 0 0 3px rgba(19
 
   pickle.addEventListener("input", update);
 
+  // Australian phone: space it while typing, validate on blur.
+  phone.addEventListener("input", reformatPhone);
+  phone.addEventListener("blur", phoneOk);
+
   // Reject oversized resumes client-side: on pick, and again as a submit guard.
   resume.addEventListener("change", resumeOk);
   form.addEventListener("submit", function(e){
+    // Validate phone first (it sits higher in the form), then resume.
+    if (!phoneOk()){
+      e.preventDefault();
+      phone.focus();
+      return;
+    }
     if (!resumeOk()){
       e.preventDefault();
       resume.focus();
